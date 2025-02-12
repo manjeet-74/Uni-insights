@@ -1,15 +1,19 @@
-import expres, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
+import { config } from "dotenv";
+import express from "express";
+import morgan from "morgan";
+import helmet from "helmet";
+import cors from "cors";
 
-dotenv.config();
+config();
 
-const app: Express = expres();
-const port = process.env.PORT || 8080;
+const app = express();
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Root");
-});
+app.use(morgan("dev"));
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`Server is listening at port ${port}`);
-});
+// app.use(middlewares.notFound)
+// app.use(middlewares.errorHandler)
+
+export default app;
