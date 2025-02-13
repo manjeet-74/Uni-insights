@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connectToDB } from "./config/db";
 import bodyParser from "body-parser";
 import { routes } from "./router";
+import { studentRouter } from "./router/studentRouter";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api", routes);
+app.use("/api", studentRouter);
 
 app.listen(port, () => {
   console.log(`Server is listening at port ${port}`);
