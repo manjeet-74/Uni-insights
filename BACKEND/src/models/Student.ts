@@ -1,29 +1,31 @@
 import Joi from "joi";
 import { model, Schema } from "mongoose";
 
-export const UserSchemaValidate = Joi.object({
+export const StudentSchemaValidate = Joi.object({
   name: Joi.string().required(),
   password: Joi.string().required(),
   email: Joi.string().required(),
-  avatar: Joi.string(),
-  phone: Joi.number(),
-  city: Joi.string(),
-  course: Joi.string(),
-  country: Joi.string(),
+  avatar: Joi.string().optional(),
+  phone: Joi.number().optional(),
+  city: Joi.string().optional(),
+  course: Joi.string().optional(),
+  country: Joi.string().optional(),
+  applications: Joi.array().items(Joi.string()).optional(),
 });
 
-export interface IUser {
+export interface IStudent {
   name: string;
   password: string;
   email: string;
   avatar?: string;
-  phone: number;
-  city: string;
-  course: string;
-  country: string;
+  phone?: number;
+  city?: string;
+  course?: string;
+  country?: string;
+  applications?: string[];
 }
 
-const userSchema = new Schema<IUser>({
+const studentSchema = new Schema<IStudent>({
   name: {
     type: String,
     required: true,
@@ -40,21 +42,23 @@ const userSchema = new Schema<IUser>({
   avatar: String,
   phone: {
     type: Number,
-    required: true,
   },
   city: {
     type: String,
-    required: true,
   },
   course: {
     type: String,
-    required: true,
   },
   country: {
     type: String,
-    required: true,
+  },
+  applications: {
+    type: {
+      type: [String],
+      default: [],
+    },
   },
 });
 
-export const User = model<IUser>("User", userSchema);
+export const Student = model<IStudent>("Student", studentSchema);
 // phone, city, course, country,

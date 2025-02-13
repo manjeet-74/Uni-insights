@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { User } from "src/models/user";
+import { Student } from "src/models/Student";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { configDotenv } from "dotenv";
@@ -39,13 +39,13 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      res.status(409).json({ message: "User already exists!" });
+    const existingStudent = await Student.findOne({ email });
+    if (existingStudent) {
+      res.status(409).json({ message: "Student already exists!" });
       return;
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({
+    const newStudent = new Student({
       name,
       email,
       password: hashedPassword,
@@ -54,12 +54,12 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
       country,
       course,
     });
-    await newUser.save();
-    const token = jwt.sign({ _id: newUser._id, email }, JWT_SECRET, {
+    await newStudent.save();
+    const token = jwt.sign({ _id: newStudent._id, email }, JWT_SECRET, {
       expiresIn: "7d",
     });
 
-    res.status(201).json({ message: "User registered successfully!", token });
+    res.status(201).json({ message: "Student registered successfully!", token });
   } catch (error: unknown) {
     if (error instanceof Error)
       res.status(500).json({
@@ -75,19 +75,19 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       res.status(400).json({ message: "All fields are required" });
       return;
     }
-    const user = await User.findOne({ email });
-    if (!user) {
+    const student = await Student.findOne({ email });
+    if (!student) {
       res.status(409).json({ message: "Invalid credentials" });
       return;
     }
 
-    const isPassweord = await bcrypt.compare(password, user.password);
+    const isPassweord = await bcrypt.compare(password, student.password);
     if (!isPassweord) {
       res.status(409).json({ message: "Invalid credentials" });
       return;
     }
 
-    const token = jwt.sign({ _id: user._id, email }, JWT_SECRET, {
+    const token = jwt.sign({ _id: student._id, email }, JWT_SECRET, {
       expiresIn: "7d",
     });
 
