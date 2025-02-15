@@ -1,10 +1,7 @@
 import axios from "axios";
-import { configDotenv } from "dotenv";
-
-configDotenv();
 
 const API = axios.create({
-  baseURL: process.env.API || "http://localhost:8080/api",
+  baseURL: import.meta.env.API || "http://localhost:8080/api",
   withCredentials: true,
 });
 
