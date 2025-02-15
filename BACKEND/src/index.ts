@@ -23,7 +23,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: "*", // Allow only frontend origin
+    origin: true, // Allow only frontend origin
     credentials: true, // Allow cookies & authorization headers
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
