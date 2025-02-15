@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { dashboard } from "../utils/api";
+import { Header } from "../components/Header";
 
 export default function Dashboard() {
   const { token, logout } = useAuth();
@@ -39,15 +40,18 @@ export default function Dashboard() {
 
 
   return (
-    <div className="max-w-md mx-auto p-6">
-      <h2 className="text-2xl font-bold">Dashboard</h2>
-      {student && (
-        <div>
-          <p>Name: {student.name}</p>
-          <p>Email: {student.email}</p>
-          <button onClick={logout} className="mt-4 p-2 bg-red-500 text-white">Logout</button>
-        </div>
-      )}
+    <div>
+      <Header />
+      <div className="max-w mx-auto p-8 flex flex-col justify-center items-center">
+        <h2 className="text-2xl font-bold">Dashboard</h2>
+        {student && (
+          <div>
+            <p>Name: {student.name}</p>
+            <p>Email: {student.email}</p>
+            <button onClick={logout} className="mt-4 p-2 bg-red-500 text-white">Logout</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

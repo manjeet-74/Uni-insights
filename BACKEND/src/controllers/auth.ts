@@ -3,6 +3,7 @@ import { Student } from "src/models/Student";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { configDotenv } from "dotenv";
+import { connectToDB } from "src/config/db";
 
 configDotenv();
 
@@ -19,6 +20,7 @@ interface IUserRequestBody {
 }
 
 export const signup = async (req: Request, res: Response): Promise<void> => {
+  connectToDB();
   try {
     if (!req.body) {
       res.status(400).json({ message: "Invalid request body" });
@@ -79,6 +81,7 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const login = async (req: Request, res: Response): Promise<void> => {
+  connectToDB();
   try {
     const { email, password } = req.body;
     if (!email || !password) {
