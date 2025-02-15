@@ -9,7 +9,8 @@ export default function LoginPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await loginStudent(credentials)
+            const res = await loginStudent(credentials)
+            localStorage.setItem("token", res.data.token)
             alert("Login successful!");
             navigate("/dashboard");
         } catch (error) {

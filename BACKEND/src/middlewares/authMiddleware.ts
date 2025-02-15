@@ -11,7 +11,12 @@ export const authenticateToken = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.header("Authorization")?.split(" ")[1];
+  // console.log(req.headers)
+  const authHeader = req.headers["authorization"];
+  console.log(authHeader);
+  const token = authHeader?.split(" ")[1];
+
+  console.log("Token from authmiddleware is: ------", token);
 
   if (!token) {
     res.status(401).json({ message: "Access denied!" });
@@ -20,7 +25,10 @@ export const authenticateToken = (
 
   try {
     const verified = jwt.verify(token, JWT_SECRET);
-    req.body.student = verified;
+    console.log("Token verification is successful");
+    console.log(verified);
+    req.body = verified;
+    // (req as any).user = verified;
     next();
   } catch (error: unknown) {
     if (error instanceof Error) {

@@ -59,7 +59,17 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
       expiresIn: "7d",
     });
 
-    res.status(201).json({ message: "Student registered successfully!", token });
+    // Set token in HTTP-only cookie
+    res.cookie("token", token, {
+      httpOnly: true, // Prevents JavaScript access
+      secure: process.env.NODE_ENV === "production", // Use secure in production
+      sameSite: "strict", // CSRF protection
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+
+    res
+      .status(201)
+      .json({ message: "Student registered successfully!", token });
   } catch (error: unknown) {
     if (error instanceof Error)
       res.status(500).json({
@@ -89,6 +99,14 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     const token = jwt.sign({ _id: student._id, email }, JWT_SECRET, {
       expiresIn: "7d",
+    });
+
+    // Set token in HTTP-only cookie
+    res.cookie("token", token, {
+      httpOnly: true, // Prevents JavaScript access
+      secure: process.env.NODE_ENV === "production", // Use secure in production
+      sameSite: "strict", // CSRF protection
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
     res.status(200).json({ message: "Login successful", token });

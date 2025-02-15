@@ -4,6 +4,8 @@ import { connectToDB } from "./config/db";
 import bodyParser from "body-parser";
 import { routes } from "./router";
 import { studentRouter } from "./router/studentRouter";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -19,6 +21,15 @@ app.use(
     extended: true,
   })
 );
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Allow only frontend origin
+    credentials: true, // Allow cookies & authorization headers
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  })
+);
+app.use(cookieParser());
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Root");

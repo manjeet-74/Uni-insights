@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api";
+const API = axios.create({
+  baseURL: "http://localhost:8080/api",
+  withCredentials: true,
+});
 
 export interface IStudent {
   name: string;
@@ -20,10 +23,13 @@ export interface ILoginStudent {
 }
 
 export const registerStudent = async (data: IStudent) =>
-  axios.post(`${API_URL}/signup`, data);
+  API.post(`/signup`, data);
 export const loginStudent = async (data: ILoginStudent) =>
-  axios.post(`${API_URL}/login`, data);
-export const dashboard = async (token: string) =>
-  axios.get(`${API_URL}/dashboard`, {
+  API.post(`/login`, data);
+export const dashboard = async (token: string) => {
+  console.log("Token being sent ", token);
+  return API.get(`/dashboard`, {
     headers: { Authorization: `Bearer ${token}` },
+    withCredentials: true,
   });
+};

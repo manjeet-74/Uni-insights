@@ -16,8 +16,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     useEffect(() => {
         if (token) {
-            const decoded: any = jwtDecode(token);
-            setUser(decoded);
+            try {
+                const decoded: any = jwtDecode(token);
+                setUser(decoded);
+            } catch (error: unknown) {
+                if (error instanceof Error)
+                    console.log("Error -----", error)
+                console.error("Invalid token: ", error)
+                logout();
+            }
         }
     }, [token]);
 
