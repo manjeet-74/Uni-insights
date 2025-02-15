@@ -10,6 +10,7 @@ export default function LoginPage() {
         e.preventDefault();
         try {
             const res = await loginStudent(credentials)
+            console.log("res is ----------", res.data)
             localStorage.setItem("token", res.data.token)
             alert("Login successful!");
             navigate("/dashboard");

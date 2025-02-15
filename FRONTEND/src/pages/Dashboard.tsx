@@ -8,7 +8,6 @@ import { FindCard } from "../components/FindCard";
 
 export default function Dashboard() {
   const { token, logout } = useAuth();
-  console.log("token from dashboard", token);
   const navigate = useNavigate();
   const [student, setStudent] = useState<any>(null);
 

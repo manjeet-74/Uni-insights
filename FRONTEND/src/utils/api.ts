@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({
-  baseURL: import.meta.env.API || "http://localhost:8080/api",
+export const API = axios.create({
+  // baseURL: import.meta.env.API || "http://localhost:8080/api",
+  baseURL: "http://localhost:8080/api",
   withCredentials: true,
 });
 
@@ -23,12 +24,17 @@ export interface ILoginStudent {
 }
 
 export const registerStudent = async (data: IStudent) =>
-  API.post(`/signup`, data);
-export const loginStudent = async (data: ILoginStudent) =>
-  API.post(`/login`, data);
+  await API.post(`/signup`, data);
+
+export const loginStudent = async (data: ILoginStudent) => {
+  const loginResult = await API.post(`/login`, data);
+  console.log("Login result is ----------", loginResult);
+  return loginResult;
+};
+
 export const dashboard = async (token: string) => {
   console.log("Token being sent ", token);
-  return API.get(`/dashboard`, {
+  return await API.get(`/dashboard`, {
     headers: { Authorization: `Bearer ${token}` },
     withCredentials: true,
   });

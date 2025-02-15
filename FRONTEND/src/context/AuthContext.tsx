@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (token) {
             try {
                 const decoded: any = jwtDecode(token);
+
                 setUser(decoded);
             } catch (error: unknown) {
                 if (error instanceof Error)
@@ -31,6 +32,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const login = (token: string) => {
         localStorage.setItem("token", token);
         setToken(token);
+        const decoded: any = jwtDecode(token)
+        console.log("decoded in AuthContext  is -------- ", decoded);
     };
 
     const logout = () => {
