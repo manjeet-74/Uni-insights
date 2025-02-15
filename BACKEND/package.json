@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "start": "node dist/app.js",
     "dev": "nodemon -r tsconfig-paths/register src/index.ts",
-    "preinstall": "npx only-allow"
+    "preinstall": "npx only-allow npm"
   },
   "keywords": [],
   "author": "",
