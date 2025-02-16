@@ -5,7 +5,7 @@ export const Header = () => {
     const { logout } = useAuth();
     return (
         <div className="flex justify-between items-center mb-4 
-        border-b-2 border-gray-500 py-6">
+        border-b-2 border-gray-500 p-6">
             <div>
                 <h1>Uni-Insights</h1>
             </div>

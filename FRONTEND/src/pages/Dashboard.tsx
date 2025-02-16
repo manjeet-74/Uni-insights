@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { dashboard } from "../utils/api";
 import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 import { Hero } from "../components/Hero";
 import { FindCard } from "../components/FindCard";
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
@@ -48,30 +49,33 @@ export default function Dashboard() {
 
 
   return (
-    <div className="px-6">
+    <div>
       <Header />
-      <Hero />
-      {/* Finding section */}
-      <div className="grid grid-cols-3
+      <div className="p-6">
+        <Hero />
+        {/* Finding section */}
+        <div className="grid grid-cols-3
       bg-[url(https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)]
       ">
-        <FindCard heading="Find a course" para="Search by subject, course or region to find the right course for you." icon={faMagnifyingGlass} />
-        <FindCard heading="Find a university" para="Search for universities to find out about courses and more. " icon={faCalendar} />
-        <FindCard heading="Find an open day" para="Search and book open days to help you make the right choice." icon={faHouse} />
+          <FindCard heading="Find a course" para="Search by subject, course or region to find the right course for you." icon={faMagnifyingGlass} />
+          <FindCard heading="Find a university" para="Search for universities to find out about courses and more. " icon={faCalendar} />
+          <FindCard heading="Find an open day" para="Search and book open days to help you make the right choice." icon={faHouse} />
 
+        </div>
+        {/* Top Ranking University  */}
+        <TopRankingUniversity />
+        <div className="max-w mx-auto p-8 flex flex-col justify-center items-center">
+          <h2 className="text-2xl font-bold">Dashboard</h2>
+          {student && (
+            <div>
+              <p>Name: {student.name}</p>
+              <p>Email: {student.email}</p>
+              <button onClick={logout} className="mt-4 p-2 bg-red-500 text-white">Logout</button>
+            </div>
+          )}
+        </div>
       </div>
-      {/* Top Ranking University  */}
-      <TopRankingUniversity />
-      <div className="max-w mx-auto p-8 flex flex-col justify-center items-center">
-        <h2 className="text-2xl font-bold">Dashboard</h2>
-        {student && (
-          <div>
-            <p>Name: {student.name}</p>
-            <p>Email: {student.email}</p>
-            <button onClick={logout} className="mt-4 p-2 bg-red-500 text-white">Logout</button>
-          </div>
-        )}
-      </div>
+      <Footer />
     </div>
   );
 }
@@ -113,3 +117,4 @@ function TopRankCard({ imageLink, uniName }: RankCardProps) {
     </div>
   )
 }
+
