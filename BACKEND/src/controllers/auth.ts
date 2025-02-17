@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { Student } from "src/models/Student";
+import { Student } from "../models/Student";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { configDotenv } from "dotenv";
-import { connectToDB } from "src/config/db";
+import { connectToDB } from "../config/db";
 
 configDotenv();
 

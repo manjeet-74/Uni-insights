@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Student } from "src/models/Student";
+import { Student } from "../models/Student";
 
 export const dashboard = async (req: Request, res: Response) => {
   try {

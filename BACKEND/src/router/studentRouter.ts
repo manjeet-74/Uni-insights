@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { dashboard } from "src/controllers/student";
-import { authenticateToken } from "src/middlewares/authMiddleware";
+import { dashboard } from "../controllers/student";
+import { authenticateToken } from "../middlewares/authMiddleware";
 
 export const studentRouter = Router();
 
