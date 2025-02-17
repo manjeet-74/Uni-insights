@@ -13,7 +13,7 @@ export default function LoginPage() {
             console.log("res is ----------", res.data)
             localStorage.setItem("token", res.data.token)
             alert("Login successful!");
-            navigate("/dashboard");
+            await navigate("/dashboard");
         } catch (error) {
             console.error(error);
             alert("Invalid credentials");
