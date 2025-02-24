@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { ApplicationController } from "src/controllers/application";
 
-const applicationRouter = Router();
+export const applicationRouter = Router();
 
 applicationRouter
   .route("/")

@@ -6,6 +6,7 @@ import { routes } from "./router";
 import { studentRouter } from "./router/studentRouter";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { applicationRouter } from "./router/applicationRouter";
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api", routes);
 app.use("/api", studentRouter);
+app.use("/api/application", applicationRouter);
 
 app.listen(port, () => {
   console.log(`Server is listening at port ${port}`);
