@@ -1,6 +1,6 @@
 import { applicationServices } from "@services/application";
 import { Request, Response } from "express";
-import { ApplicationSchemaValidate } from "src/models/Application";
+import { ApplicationSchemaValidate } from "../models/Application";
 
 class applicationController {
   addApplication = async (req: Request, res: Response) => {

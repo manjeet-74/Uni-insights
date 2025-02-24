@@ -1,4 +1,4 @@
-import { Application, IApplication } from "src/models/Application";
+import { Application, IApplication } from "../models/Application";
 
 export class applicationService {
   async createApplication(data: IApplication) {

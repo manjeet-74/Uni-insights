@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ApplicationController } from "src/controllers/application";
+import { ApplicationController } from "../controllers/application";
 
 export const applicationRouter = Router();
 
