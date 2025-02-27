@@ -1,4 +1,4 @@
-import { applicationServices } from "@services/application";
+import { applicationServices } from "../services/application";
 import { Request, Response } from "express";
 import { ApplicationSchemaValidate } from "../models/Application";
 
