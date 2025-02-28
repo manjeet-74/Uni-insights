@@ -17,6 +17,24 @@ export interface IStudent {
   applications?: string[];
 }
 
+export interface IApplication {
+  title: string;
+  description: string;
+  studentId: string;
+  status: string;
+  college: string;
+  course: string;
+  country: string;
+  city: string;
+  date: Date;
+  deadline: Date;
+  documents: string[];
+  comments: string[];
+  rating: Number;
+  feedback: string;
+  feedbackDate: Date;
+}
+
 export interface ILoginStudent {
   email: string;
   password: string;
@@ -37,4 +55,14 @@ export const dashboard = async (token: string) => {
     headers: { Authorization: `Bearer ${token}` },
     withCredentials: true,
   });
+};
+
+export const applicationSubmit = async (data: IApplication) => {
+  if (!data.studentId) {
+    console.log("Application is rejected");
+    return;
+  }
+  const applicationSent = await API.post(`/application`, data);
+  console.log("Application sent is ----------", applicationSent);
+  return applicationSent;
 };

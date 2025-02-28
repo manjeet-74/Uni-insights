@@ -8,7 +8,7 @@ export default function Register() {
         e.preventDefault();
         try {
             await registerStudent(student)
-            alert("Register Siccessful!")
+            alert("Register Successful!")
         } catch (error: unknown) {
             if (error instanceof Error) {
                 console.log(error.message)

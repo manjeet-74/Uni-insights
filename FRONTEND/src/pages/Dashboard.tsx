@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { dashboard } from "../utils/api";
+import { dashboard, IStudent } from "../utils/api";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { Hero } from "../components/Hero";
@@ -17,7 +17,7 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 export default function Dashboard() {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
-  const [student, setStudent] = useState<any>(null);
+  const [student, setStudent] = useState<IStudent>();
 
   useEffect(() => {
     if (!token) {

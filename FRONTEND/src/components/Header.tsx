@@ -37,6 +37,7 @@ export const Header = () => {
                 }}>About</Link>
             </div>
             <div className="flex space-x-6 items-center">
+                <Link to={{ pathname: "/applicationForm" }}>New Application</Link>
                 <Link to={{
                     pathname: "/login",
                 }} className="btn">Login</Link>
